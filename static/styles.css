@@ -1,0 +1,287 @@
+/* styles.css */
+
+/* General styles */
+body {
+    background-color: white;
+    color: black;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 20px; /* Standardized font size */
+    margin-top: 2%;
+}
+
+h1 {
+    font-size: 1.5em; /* Standardized heading size */
+    margin-top: 2%;
+    background-color: white;
+    color: black;
+}
+
+/* Error message styling */
+.error {
+    color: red;
+    font-size: 1em; /* Standardized error message size */
+}
+
+/* Button container styling */
+.button-container {
+    margin-top: 1%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-container button {
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em; /* Standardized button text size */
+    cursor: pointer;
+    margin: 0 2%;
+}
+
+.button-container .error-placeholder {
+    width: 20%;
+    text-align: center;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-container .error-placeholder .error {
+    margin: 0;
+}
+
+.button-container button:hover {
+    background-color: #0056b3;
+}
+
+.button-container button.left-arrow {
+    background-color: #BABEC2;
+}
+
+.button-container button.right-arrow {
+    background-color: #1F83E7;
+}
+
+.image-container {
+    position: relative;
+    max-width: 500px; /* Adjust the maximum width as needed */
+    margin: 0 auto; /* Center the image container horizontally */
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    display: none;
+}
+
+.image-container img.placeholder-image {
+    display: block;
+}
+
+/* Updated multi-button styling */
+.multi-button {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 4%;
+}
+
+.multi-button label {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1.5em; /* Standardized emoji button size */
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.multi-button input[type="radio"] {
+    display: none;
+}
+
+.multi-button input[type="radio"]:checked + label {
+    background-color: #ddd;
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.multi-button i.fa-dizzy {
+    color: #c5291f;
+}
+
+.multi-button i.fa-frown {
+    color: #c56225;
+}
+
+.multi-button i.fa-meh {
+    color: #c49f2c;
+}
+
+.multi-button i.fa-smile {
+    color: #a09b34;
+}
+
+.multi-button i.fa-grin-stars {
+    color: #84973b;
+}
+
+.pause-container {
+    margin-top: 1%;
+    text-align: center;
+}
+
+.pause-rectangle {
+    background-color: grey;
+    padding: 0.5%;
+    display: inline-block;
+    border-radius: 5px;
+    margin-top: 1%;
+}
+
+.pause-button {
+    font-size: 1.5em; /* Standardized pause button size */
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    outline: none;
+}
+
+.pause-button i {
+    margin-right: 0%;
+}
+
+/* pause.html style */
+.button-pause-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 2%;
+}
+
+.button-form {
+    display: inline-block;
+}
+
+.resume-button, .stop-button {
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.resume-button {
+    font-size: 1.5em; /* Standardized resume button size */
+    background-color: green;
+    margin-bottom: 10%;
+    padding: 10px 20px;
+}
+
+.resume-button:hover {
+    background-color: darkgreen;
+}
+
+.stop-button {
+    font-size: 1em; /* Standardized stop button size */
+    background-color: grey;
+    padding: 5px 10px;
+}
+
+.stop-button:hover {
+    background-color: darkgrey;
+}
+
+/* login.html style */
+.login-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right bottom;
+}
+
+.login-form {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 1%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    flex: 1;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 2%;
+    color: black;
+    font-size: 1.5em; /* Standardized heading size */
+}
+
+.username-input {
+    width: 35%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.username-input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.login-button {
+    width: 30%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 100%;
+}
+
+.login-button:hover {
+    background-color: #0056b3;
+}
+
+.button-wrapper {
+    display: flex;
+}
+
+.no-button, .yes-button {
+    margin-right: 10px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+.no-button {
+    background-color: red;
+    color: white;
+}
+
+.yes-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.no-button:hover {
+    background-color: darkred;
+}
+
+.yes-button:hover {
+    background-color: #0056b3;
+}

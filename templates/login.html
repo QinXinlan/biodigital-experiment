@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>	
+    <link rel="stylesheet" type="text/css" href="../static/styles.css">
+	<script>
+        function setCustomValidationMessages() {
+            const usernameInput = document.querySelector('.username-input');
+            usernameInput.oninvalid = function(event) {
+                event.target.setCustomValidity('Please enter a username. 请输入用户名。');
+            };
+            usernameInput.oninput = function(event) {
+                event.target.setCustomValidity(''); // Clear any previous custom validation message
+            };
+        }
+        document.addEventListener('DOMContentLoaded', setCustomValidationMessages);
+    </script>
+</head>
+<body>
+    <div class="login-form">
+        <h2>How much do you like biodigital architecture designs? 
+			<br>你有多喜欢生物数字建筑设计？
+			<br>
+			<br>Please enter a username and start the questionaire.
+			<br>请输入用户名并开始问卷调查。
+		</h2>
+		{% if error %}
+			<form action="{{ url_for('login') }}" method="post">
+				<div class="form-group">
+					<input type="text" name="username" placeholder="Username 用户名" class="username-input" value="{{ username }}" required>
+					<div class="error-placeholder">                    
+						<div class="error">{{ error|safe }}</div> <!-- Make sure the error message is rendered as HTML -->                    
+					</div>
+				</div>
+				<div class="form-group">
+					<button type="submit" name="action" value="no" class="no-button">No 不是</button>		
+					<button type="submit" name="action" value="yes" class="yes-button">Yes 是的</button>				
+				</div>
+			</form>
+		{% else %}
+			<form action="{{ url_for('login') }}" method="post">
+				<div class="form-group">
+					<input type="text" name="username" placeholder="Username 用户名" class="username-input" required>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="login-button">Start 开始</button>
+				</div>
+			</form>
+
+		{% endif %}
+    </div>
+</body>
+</html>

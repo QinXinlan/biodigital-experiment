@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bio-digital architecture questionnaire</title>
+    <link rel="stylesheet" type="text/css" href="../static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .multi-button > * {
+            opacity: 0;
+        }
+        .multi-button.visible > * {
+            opacity: 1;
+        }
+        .image-container {
+            position: relative;
+            width: 100%;
+            height: auto;
+        }
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: none;
+        }
+        .image-container img.placeholder-image {
+            display: block;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const placeholderImage = document.querySelector(".placeholder-image");
+            const mainImage = document.querySelector(".question-image");
+            const emojiContainer = document.getElementById('emoji-container');
+            let imageLoadTime, emojiDisplayTime, placeholderDisplayTime;
+
+            placeholderImage.onload = function() {
+                placeholderDisplayTime = new Date().toISOString();
+                console.log("Placeholder image loaded at: " + placeholderDisplayTime);
+                setTimeout(function() {
+                    mainImage.style.display = 'block';
+                    placeholderImage.style.display = 'none';
+                    imageLoadTime = new Date().toISOString();
+                    console.log("Main image displayed at: " + imageLoadTime);
+                    setTimeout(function() {
+                        emojiContainer.classList.add('visible');
+                        emojiDisplayTime = new Date().toISOString();
+                        console.log("Emojis displayed at: " + emojiDisplayTime);
+                    }, 2000);  // 2000 milliseconds = 2 seconds after the main image is displayed
+                }, 1000);  // 1000 milliseconds = 1 second after the placeholder image is loaded
+            };
+
+            document.querySelector("form").addEventListener("submit", function(event) {
+                if (placeholderDisplayTime) {
+                    let inputPlaceholderDisplayTime = document.createElement("input");
+                    inputPlaceholderDisplayTime.setAttribute("type", "hidden");
+                    inputPlaceholderDisplayTime.setAttribute("name", "placeholder_display_time");
+                    inputPlaceholderDisplayTime.setAttribute("value", placeholderDisplayTime);
+                    this.appendChild(inputPlaceholderDisplayTime);
+                }
+
+                if (imageLoadTime) {
+                    let inputImageLoadTime = document.createElement("input");
+                    inputImageLoadTime.setAttribute("type", "hidden");
+                    inputImageLoadTime.setAttribute("name", "image_load_time");
+                    inputImageLoadTime.setAttribute("value", imageLoadTime);
+                    this.appendChild(inputImageLoadTime);
+                }
+
+                if (emojiDisplayTime) {
+                    let inputEmojiDisplayTime = document.createElement("input");
+                    inputEmojiDisplayTime.setAttribute("type", "hidden");
+                    inputEmojiDisplayTime.setAttribute("name", "emoji_display_time");
+                    inputEmojiDisplayTime.setAttribute("value", emojiDisplayTime);
+                    this.appendChild(inputEmojiDisplayTime);
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ qnum + 1 }} / {{ total }}</h1>
+        <div class="image-container">
+            <!-- Placeholder image -->
+            <img src="{{ url_for('static', filename='placeholder.png') }}" alt="Placeholder Image" class="placeholder-image">
+            <!-- Main image -->
+            <img src="{{ url_for('static', filename=image_name) }}" alt="Question Image" class="question-image">
+        </div>
+        <form method="POST">
+            <div id="emoji-container" class="multi-button">
+                {% for emoji in options %}
+                <input type="radio" id="option{{ loop.index }}" name="answer" value="{{ emoji }}" {% if emoji|string == preselected_answer %}checked{% endif %}>
+                <label for="option{{ loop.index }}">
+                    {% if emoji == 0 %}
+                    <i class="fas fa-dizzy fa-2x"></i>
+                    {% elif emoji == 1 %}
+                    <i class="fas fa-frown fa-2x"></i>
+                    {% elif emoji == 2 %}
+                    <i class="fas fa-meh fa-2x"></i>
+                    {% elif emoji == 3 %}
+                    <i class="fas fa-smile fa-2x"></i>
+                    {% elif emoji == 4 %}
+                    <i class="fas fa-grin-stars fa-2x"></i>
+                    {% endif %}
+                </label>
+                {% endfor %}
+            </div>
+            <div class="button-container">
+                <button type="submit" name="navigate" value="previous" class="left-arrow">
+                    <i class="fas fa-arrow-left"></i> <!-- Replace text "Go Back" with icon --> 
+                </button>
+                <div class="error-placeholder">
+                    {% if error %}
+                    <div class="error">{{ error|safe }}</div> <!-- Make sure the error message is rendered as HTML -->
+                    {% endif %}
+                </div>
+                <button type="submit" name="navigate" value="next" class="right-arrow">
+                    <i class="fas fa-arrow-right"></i> <!-- Replace text "Next" with icon --> 
+                </button>
+            </div>
+            <div class="pause-container">
+                <div class="pause-rectangle">
+                    <button type="submit" name="pause" value="pause" class="pause-button">
+                        <i class="fas fa-pause"></i> 
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
